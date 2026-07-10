@@ -53,8 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toast-message');
     
-    // Set current URL in Share link
-    shareLinkInput.value = window.location.href;
+    // Set current URL in Share link and button properties
+    if (shareLinkInput) shareLinkInput.value = window.location.href;
+    if (btnCopyLink) {
+        btnCopyLink.setAttribute('data-link', window.location.href);
+        btnCopyLink.setAttribute('title', window.location.href);
+    }
 
     // 1. Envelope Welcome Opening Animation
     const openEnvelope = () => {
@@ -165,14 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Sharing Dashboard Event Handlers
     btnCopyLink.addEventListener('click', () => {
-        shareLinkInput.select();
-        shareLinkInput.setSelectionRange(0, 99999);
-        navigator.clipboard.writeText(shareLinkInput.value)
+        const linkToCopy = window.location.href;
+        navigator.clipboard.writeText(linkToCopy)
             .then(() => {
                 showToast("Invitation link copied!");
                 document.getElementById('copy-btn-text').textContent = "Copied!";
                 setTimeout(() => {
-                    document.getElementById('copy-btn-text').textContent = "Copy Link";
+                    document.getElementById('copy-btn-text').textContent = "Copy Invitation Link";
                 }, 3000);
             })
             .catch(err => {
