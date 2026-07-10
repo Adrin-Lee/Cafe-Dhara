@@ -205,63 +205,16 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Draw vector QR Code onto Canvas manually
-    const drawQRCode = (canvas, dataString) => {
-        const ctx = canvas.getContext('2d');
-        const size = canvas.width;
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, size, size);
-
-        ctx.fillStyle = '#1e4a28'; // Green QR Code to match Dhara!
-        
-        // QR Position Detection Outer Squares
-        const drawFinder = (x, y) => {
-            ctx.fillRect(x, y, 7 * 3, 7 * 3);
-            ctx.fillStyle = '#FFFFFF';
-            ctx.fillRect(x + 3, y + 3, 5 * 3, 5 * 3);
-            ctx.fillStyle = '#1e4a28';
-            ctx.fillRect(x + 6, y + 6, 3 * 3, 3 * 3);
-        };
-
-        drawFinder(4, 4); 
-        drawFinder(size - 25, 4); 
-        drawFinder(4, size - 25); 
-
-        // Small timing patterns
-        for (let i = 25; i < size - 25; i += 6) {
-            ctx.fillRect(i, 13, 3, 3);
-            ctx.fillRect(13, i, 3, 3);
-        }
-
-        // Seeded random pseudo QR noise
-        let seed = 0;
-        for (let i = 0; i < dataString.length; i++) {
-            seed += dataString.charCodeAt(i);
-        }
-
-        const pseudoRandom = () => {
-            const x = Math.sin(seed++) * 10000;
-            return x - Math.floor(x);
-        };
-
-        // Fill remaining area with barcode noise
-        for (let x = 4; x < size - 4; x += 3) {
-            for (let y = 4; y < size - 4; y += 3) {
-                // Skip finder square zones
-                if ((x < 28 && y < 28) || (x > size - 28 && y < 28) || (x < 28 && y > size - 28)) {
-                    continue;
-                }
-                if (pseudoRandom() > 0.48) {
-                    ctx.fillRect(x, y, 3, 3);
-                }
-            }
-        }
-    };
-
-    // Draw main invite QR Code
+    // Draw functional, scannable QR Code using QRious
     const inviteQRCanvas = document.getElementById('invite-url-qr');
     if (inviteQRCanvas) {
-        drawQRCode(inviteQRCanvas, window.location.href);
+        new QRious({
+            element: inviteQRCanvas,
+            value: window.location.href,
+            size: 160,
+            background: '#ffffff',
+            foreground: '#1e4a28' // Botanical Green to match Dhara!
+        });
     }
 
     // 5. Sharing Dashboard Event Handlers
