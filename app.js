@@ -170,9 +170,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Sharing Dashboard Event Handlers
     btnCopyLink.addEventListener('click', () => {
         const linkToCopy = window.location.href;
-        navigator.clipboard.writeText(linkToCopy)
+        
+        const performCopy = () => {
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(linkToCopy);
+            } else {
+                return new Promise((resolve, reject) => {
+                    try {
+                        const textArea = document.createElement("textarea");
+                        textArea.value = linkToCopy;
+                        textArea.style.position = "fixed";
+                        textArea.style.top = "0";
+                        textArea.style.left = "0";
+                        textArea.style.opacity = "0";
+                        document.body.appendChild(textArea);
+                        textArea.focus();
+                        textArea.select();
+                        const successful = document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        if (successful) {
+                            resolve();
+                        } else {
+                            reject(new Error("execCommand copy failed"));
+                        }
+                    } catch (err) {
+                        reject(err);
+                    }
+                });
+            }
+        };
+
+        performCopy()
             .then(() => {
-                showToast("Invitation link copied!");
+                showToast("Invitation link copied! 📋");
                 document.getElementById('copy-btn-text').textContent = "Copied!";
                 setTimeout(() => {
                     document.getElementById('copy-btn-text').textContent = "Copy Invitation Link";
@@ -180,6 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .catch(err => {
                 console.error("Failed to copy link:", err);
+                showToast("Failed to copy automatically. Please copy the URL from browser bar.");
             });
     });
 
