@@ -1951,3 +1951,110 @@ img {
     box-shadow: 0 4px 15px rgba(143, 179, 57, 0.2);
 }
 
+/* Mobile and Tablet Responsiveness Overrides (v1.2) */
+@media (max-width: 768px) {
+    /* Reduce large section paddings */
+    .story-section,
+    .schedule-section,
+    .share-section,
+    .location-section {
+        padding: 4rem 0;
+    }
+    
+    /* Optimize navigation header padding */
+    .nav-container {
+        padding: 0.8rem 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Stack share actions cards vertically and fix width constraints */
+    .share-grid {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+    
+    .share-actions-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .share-buttons-container {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .share-btn {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .calendar-buttons {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .calendar-buttons button {
+        width: 100%;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .copy-link-box {
+        display: block;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .copy-link-box button {
+        border-radius: var(--border-radius-sm, 4px) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Compact navigation for very small screens */
+    .music-label {
+        display: none; /* Hide 'AMBIENCE' text, keep icon active */
+    }
+    
+    .music-toggle {
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .nav-brand span {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    /* Shrink countdown timer to fit 320px width viewports without wrapping */
+    .countdown-container {
+        gap: 0.6rem;
+    }
+    
+    .countdown-item {
+        width: 62px;
+        height: 62px;
+    }
+    
+    .countdown-item .number {
+        font-size: 1.3rem;
+    }
+    
+    .countdown-item .label {
+        font-size: 0.5rem;
+        margin-top: 1px;
+    }
+    
+    .countdown-divider {
+        font-size: 1.2rem;
+    }
+
+    /* Tweak story and location layouts */
+    .section-header .title {
+        font-size: 1.8rem;
+    }
+    
+    .story-image {
+        height: 280px;
+    }
+}
+
+
