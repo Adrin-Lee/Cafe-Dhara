@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Opening Invitation | Café Dhara</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="You are cordially invited to the Grand Opening of Café Dhara in Jakkur, Bengaluru. Join us for a journey of warm brews, delicious bites, and refreshing moments. RSVP inside.">
+    <meta name="keywords" content="Café Dhara, Cafe Dhara Bengaluru, Grand Opening, Digital Invitation, Jakkur Cafe RSVP">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cafedhara.com/invitation">
+    <meta property="og:title" content="Café Dhara | Grand Opening Invitation">
+    <meta property="og:description" content="We're opening our doors! Join us on July 11, 2026, at 4:00 PM in Jakkur, Bengaluru. RSVP to claim your complimentary hot drink & snack.">
+    <meta property="og:image" content="assets/hero.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Café Dhara | Grand Opening Invitation">
+    <meta property="twitter:description" content="We're opening our doors! Join us on July 11, 2026, at 4:00 PM in Jakkur, Bengaluru. RSVP to claim your complimentary hot drink & snack.">
+    <meta property="twitter:image" content="assets/hero.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet CSS for Luxury Dark Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Wax-Seal Envelope Welcome Overlay -->
+    <div id="welcome-overlay" class="welcome-overlay">
+        <div class="envelope-wrapper">
+            <div class="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-flap"></div>
+                <div class="envelope-paper">
+                    <div class="paper-logo">
+                        <img src="assets/logo.png" alt="Café Dhara Emblem" class="emblem-gold">
+                    </div>
+                    <h2 class="paper-title">Exclusive Invitation</h2>
+                    <p class="paper-text">Where every sip feels refreshing.</p>
+                    <button class="btn btn-green btn-open" id="btn-open-envelope">Unfold Invitation</button>
+                </div>
+                <div class="envelope-front"></div>
+                <div class="wax-seal" id="wax-seal">
+                    <div class="seal-inner">D</div>
+                </div>
+            </div>
+            <p class="overlay-instruction">Click the wax seal to reveal</p>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-brand">
+                <img src="assets/logo.png" alt="D" class="nav-logo">
+                <span>CAFÉ DHARA</span>
+            </a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#story" class="nav-link">Our Story</a></li>
+                <li><a href="#schedule" class="nav-link">Schedule</a></li>
+                <li><a href="#location" class="nav-link">Location</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button id="music-toggle" class="music-toggle" aria-label="Toggle Ambient Music">
+                    <span class="music-label">AMBIENCE</span>
+                    <div class="equalizer" id="equalizer">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </button>
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section" id="home">
+        <div class="hero-background" style="background-image: linear-gradient(to bottom, rgba(15, 23, 17, 0.5), rgba(15, 23, 17, 0.95)), url('assets/hero.jpg');"></div>
+        <div class="hero-content">
+            <div class="brand-badge-container">
+                <img src="assets/logo.png" alt="Café Dhara Logo" class="hero-logo animate-float">
+            </div>
+            <p class="hero-subtitle">WE'RE OPENING OUR DOORS</p>
+            <h1 class="hero-title">CAFÉ DHARA</h1>
+            <p class="hero-tagline">"Where Every Sip Feels Refreshing"</p>
+            <p class="hero-location-date">11TH JULY 2026 • 4:00 PM • JAKKUR, BENGALURU</p>
+            
+            <!-- Countdown Clock -->
+            <div class="countdown-container" id="countdown" data-date="2026-07-11T16:00:00">
+                <div class="countdown-item">
+                    <span class="number" id="days">00</span>
+                    <span class="label">Days</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-item">
+                    <span class="number" id="hours">00</span>
+                    <span class="label">Hours</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-item">
+                    <span class="number" id="minutes">00</span>
+                    <span class="label">Mins</span>
+                </div>
+                <div class="countdown-divider">:</div>
+                <div class="countdown-item">
+                    <span class="number" id="seconds">00</span>
+                    <span class="label">Secs</span>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="#story" class="btn btn-green btn-lg">Explore Café Dhara</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll to Unveil</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- Highlights Banner -->
+    <section class="highlights-banner">
+        <div class="container">
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <i class="fas fa-mug-hot"></i>
+                    <h3>Complimentary Drink & Snack</h3>
+                    <p>Celebrate our opening with a free signature hot brew and fresh bite.</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-feather-alt"></i>
+                    <h3>Peaceful Vibes</h3>
+                    <p>Designed with natural finishes and open spaces for absolute calm.</p>
+                </div>
+                <div class="highlight-card">
+                    <i class="fas fa-couch"></i>
+                    <h3>Calm & Cozy Ambience</h3>
+                    <p>Our double-story garden layout is the perfect escape to unwind.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="story-section" id="story">
+        <div class="container">
+            <div class="section-header">
+                <span class="subtitle">Our New Journey</span>
+                <h2 class="title">Welcome to Café Dhara</h2>
+                <div class="divider-gold"><span></span></div>
+            </div>
+            
+            <div class="story-content-grid">
+                <div class="story-text">
+                    <p class="lead-text">
+                        A new destination in Bengaluru filled with warm brews, delicious bites, and memorable moments.
+                    </p>
+                    <p>
+                        Inspired by the Sanskrit word "Dhara", which signifies the steady, nourishing flow of the Earth, Café Dhara is built as a nature-infused sanctuary. Set inside an architectural double-story garden framework, we combine organic greenery, ambient light, and rustic wooden textures.
+                    </p>
+                    <p>
+                        We source our specialty coffee beans from the mist-covered hills of Chikmagalur, roasted to perfection to ensure a refreshing and rich flavor profile in every cup. 
+                    </p>
+                    <p>
+                        Join us on our opening day to experience our tranquil space, meet our passionate baristas, and enjoy complimentary hospitality as we begin this new journey together.
+                    </p>
+                    <div class="signature">
+                        <p class="sig-name">The Dhara Family</p>
+                        <p class="sig-title">Bengaluru's Botanical Coffee Bar</p>
+                    </div>
+                </div>
+                <div class="story-visual">
+                    <div class="visual-frame">
+                        <img src="assets/hero.jpg" alt="Café Dhara Garden Layout" class="story-image">
+                        <div class="frame-border"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Schedule Section -->
+    <section class="schedule-section" id="schedule">
+        <div class="container">
+            <div class="section-header">
+                <span class="subtitle">Launch Festivities</span>
+                <h2 class="title">Grand Opening Day Timeline</h2>
+                <div class="divider-gold"><span></span></div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">4:00 PM</div>
+                    <div class="timeline-content">
+                        <h3>Doors Open & Welcome Strum</h3>
+                        <p>Walk through our doors to acoustic melodies. Every guest will receive a custom floral welcome drink and a complimentary coupon for our opening brews.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">5:00 PM</div>
+                    <div class="timeline-content">
+                        <h3>The Founders' Welcome & Ribbon Cutting</h3>
+                        <p>Gather under the garden pavilion for our brief ribbon-cutting ceremony. Hear the journey of Café Dhara and our commitment to bringing local Bengaluru coffee culture to life.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">6:00 PM</div>
+                    <div class="timeline-content">
+                        <h3>Barista Cupping & Coffee Crafting</h3>
+                        <p>Learn pouring secrets from our head baristas. Enjoy a sensory coffee cupping session showcasing beans from Karnataka's finest sustainable plantations.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-time">7:30 PM</div>
+                    <div class="timeline-content">
+                        <h3>Sunset Acoustic Lounge & Pastry Showcase</h3>
+                        <p>Unwind in our open-air seating area as the sunset settles. Listen to live acoustic sets accompanied by warm cardamom buns and hot espresso pairings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Share Dashboard Section -->
+    <section class="share-section" id="share">
+        <div class="container">
+            <div class="section-header">
+                <span class="subtitle">Invite Your Friends</span>
+                <h2 class="title">Share the Refreshing News</h2>
+                <div class="divider-gold"><span></span></div>
+            </div>
+
+            <div class="share-grid">
+                <div class="share-qr-card">
+                    <canvas id="invite-url-qr" width="160" height="160"></canvas>
+                    <p class="qr-instruction">Scan to open digital invitation on another device</p>
+                </div>
+                <div class="share-actions-card">
+                    <h3>Send Digital Invitation</h3>
+                    <p>Share this digital card with friends. Copy the invitation link or share directly via messaging apps or email.</p>
+                    
+                    <div class="copy-link-box">
+                        <input type="text" id="share-link-input" readonly value="https://cafedhara.com/invitation">
+                        <button class="btn btn-green" id="btn-copy-link">
+                            <span id="copy-btn-text">Copy Link</span>
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="share-buttons-container">
+                        <a href="#" class="share-btn btn-whatsapp" id="btn-share-whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="#" class="share-btn btn-facebook" id="btn-share-facebook" target="_blank">
+                            <i class="fab fa-facebook-f"></i> Facebook
+                        </a>
+                        <a href="#" class="share-btn btn-email" id="btn-share-email">
+                            <i class="far fa-envelope"></i> Email invite
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Venue Section -->
+    <section class="location-section" id="location">
+        <div class="container">
+            <div class="section-header">
+                <span class="subtitle">Where to Find Us</span>
+                <h2 class="title">Venue & Details</h2>
+                <div class="divider-gold"><span></span></div>
+            </div>
+
+            <div class="location-grid">
+                <!-- Location Details Card -->
+                <div class="location-info-card">
+                    <div class="info-block">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-details">
+                            <h3>Address</h3>
+                            <p>11th Cross Road, MCECHS Layout Phase 2</p>
+                            <p>Dr. Shivaram Karanth Nagar</p>
+                            <p>Jakkur, Bengaluru – 560077</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-block">
+                        <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="info-details">
+                            <h3>Opening Time</h3>
+                            <p>Saturday, 11th July 2026</p>
+                            <p>Ceremony begins at 4:00 PM IST</p>
+                        </div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="info-icon"><i class="fas fa-calendar-check"></i></div>
+                        <div class="info-details">
+                            <h3>Add to Calendar</h3>
+                            <p>Mark your diary so you don't miss the ribbon-cutting and complimentary cupping!</p>
+                            <div class="calendar-buttons">
+                                <button class="btn btn-border btn-sm" id="btn-cal-google">Google Calendar</button>
+                                <button class="btn btn-border btn-sm" id="btn-cal-ical">Apple / Outlook iCal</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Map Frame -->
+                <div class="map-container-wrapper">
+                    <div id="map" class="map-frame"></div>
+                    <div class="map-actions">
+                        <a href="https://maps.app.goo.gl/oHcx3sReKGuVj3QS9" target="_blank" class="btn btn-green btn-block">
+                            <i class="fas fa-route"></i> Get Google Maps Directions
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast hidden">
+        <span id="toast-message">Message copied!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <img src="assets/logo.png" alt="Dhara Logo" class="footer-logo">
+            <h2 class="footer-brand">CAFÉ DHARA</h2>
+            <p class="footer-quote">"Where Every Sip Feels Refreshing"</p>
+            <div class="social-links">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Café Dhara. Designed for the Grand Opening Ceremony.</p>
+        </div>
+    </footer>
+
+    <!-- Hidden YouTube Helper Player -->
+    <div id="yt-helper-player" style="position: absolute; top: -9999px; left: -9999px; width: 0; height: 0; opacity: 0; pointer-events: none;"></div>
+
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
