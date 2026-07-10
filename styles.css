@@ -234,8 +234,15 @@ img {
 
 .envelope-wrapper {
     position: relative;
-    width: 450px;
-    height: 350px;
+    --envelope-w: 450px;
+    --envelope-h: 280px;
+    --half-w: calc(var(--envelope-w) / 2);
+    --half-h: calc(var(--envelope-h) / 2);
+    --flap-h: 150px;
+    --seal-size: 60px;
+    
+    width: var(--envelope-w);
+    height: calc(var(--envelope-h) + 70px);
     perspective: 1200px;
     display: flex;
     flex-direction: column;
@@ -244,8 +251,8 @@ img {
 
 .envelope {
     position: relative;
-    width: 100%;
-    height: 280px;
+    width: var(--envelope-w);
+    height: var(--envelope-h);
     background: #19271c;
     border-radius: 4px;
     box-shadow: 0 30px 60px rgba(0,0,0,0.6);
@@ -291,9 +298,9 @@ img {
     left: 0;
     width: 0;
     height: 0;
-    border-top: 140px solid transparent;
-    border-bottom: 140px solid transparent;
-    border-left: 225px solid #1c2e21; /* Lighter left fold */
+    border-top: var(--half-h) solid transparent;
+    border-bottom: var(--half-h) solid transparent;
+    border-left: var(--half-w) solid #1c2e21; /* Lighter left fold */
     z-index: 3;
     border-top-left-radius: 4px;
     border-bottom-left-radius: 4px;
@@ -305,9 +312,9 @@ img {
     right: 0;
     width: 0;
     height: 0;
-    border-top: 140px solid transparent;
-    border-bottom: 140px solid transparent;
-    border-right: 225px solid #142016; /* Darker right fold for shadow contrast */
+    border-top: var(--half-h) solid transparent;
+    border-bottom: var(--half-h) solid transparent;
+    border-right: var(--half-w) solid #142016; /* Darker right fold for shadow contrast */
     z-index: 3;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -319,9 +326,9 @@ img {
     left: 0;
     width: 0;
     height: 0;
-    border-left: 225px solid transparent;
-    border-right: 225px solid transparent;
-    border-bottom: 140px solid #19271c; /* Bottom fold overlapping side folds */
+    border-left: var(--half-w) solid transparent;
+    border-right: var(--half-w) solid transparent;
+    border-bottom: var(--half-h) solid #19271c; /* Bottom fold overlapping side folds */
     z-index: 4;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -334,9 +341,9 @@ img {
     left: 0;
     width: 0;
     height: 0;
-    border-left: 225px solid transparent;
-    border-right: 225px solid transparent;
-    border-top: 150px solid #203325; /* Forest green flap pointing down */
+    border-left: var(--half-w) solid transparent;
+    border-right: var(--half-w) solid transparent;
+    border-top: var(--flap-h) solid #203325; /* Forest green flap pointing down */
     transform-origin: top;
     z-index: 5; /* On top of paper card and pocket folds when closed */
     transition: transform 0.8s ease, border-top-color 0.4s 0.2s ease, z-index 0s 0.4s;
@@ -408,12 +415,12 @@ img {
 /* Organic Embossed Gold Wax Seal */
 .wax-seal {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: var(--seal-size, 60px);
+    height: var(--seal-size, 60px);
     background: radial-gradient(circle, #eec855 10%, #aa7c11 75%, #684b05 100%);
     border-radius: 44% 56% 48% 62% / 52% 44% 58% 46%; /* irregular melted wax border */
     top: 48%;
-    left: calc(50% - 30px);
+    left: calc(50% - (var(--seal-size, 60px) / 2));
     z-index: 6; /* Always stays on top of flaps when closed */
     box-shadow: 0 6px 12px rgba(0,0,0,0.45), inset 0 2px 4px rgba(255,255,255,0.3);
     cursor: pointer;
@@ -2016,6 +2023,23 @@ img {
     .nav-container {
         padding: 0.8rem 1.2rem;
     }
+
+    /* Scale envelope structure for tablet screens */
+    .envelope-wrapper {
+        --envelope-w: 390px;
+        --envelope-h: 245px;
+        --half-w: 195px;
+        --half-h: 122.5px;
+        --flap-h: 130px;
+        --seal-size: 52px;
+        height: calc(var(--envelope-h) + 60px);
+    }
+
+    .seal-inner {
+        width: 36px;
+        height: 36px;
+        font-size: 1.3rem;
+    }
 }
 
 @media (max-width: 600px) {
@@ -2073,6 +2097,48 @@ img {
     .nav-brand span {
         font-size: 1rem;
         letter-spacing: 1px;
+    }
+
+    /* Scale envelope structure and card typography for mobile screens */
+    .envelope-wrapper {
+        --envelope-w: 290px;
+        --envelope-h: 180px;
+        --half-w: 145px;
+        --half-h: 90px;
+        --flap-h: 100px;
+        --seal-size: 44px;
+        height: calc(var(--envelope-h) + 50px);
+    }
+
+    .seal-inner {
+        width: 30px;
+        height: 30px;
+        font-size: 1.1rem;
+    }
+
+    .envelope-paper {
+        padding: 1rem;
+        outline-offset: -3px;
+    }
+
+    .paper-logo {
+        width: 32px;
+        margin-bottom: 0.5rem;
+    }
+
+    .paper-title {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .paper-text {
+        font-size: 0.6rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .btn-open {
+        font-size: 0.65rem;
+        padding: 0.4rem 0.8rem;
     }
 
     /* Shrink countdown timer to fit 320px width viewports without wrapping */
