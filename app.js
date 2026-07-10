@@ -9,66 +9,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const EVENT_DATE = new Date('2026-07-11T16:00:00'); // July 11, 2026 at 4:00 PM IST
     const MOCK_COORDINATES = [13.0718196, 77.6159629]; // Jakkur, Bengaluru
     
-    // Audio Ambience Engine using YouTube IFrame Player API
+    // Audio Ambience Engine using Synchronous IFrame Source Toggling
     class YouTubeAmbience {
         constructor() {
-            this.player = null;
+            this.iframe = document.getElementById('yt-helper-player');
             this.isPlaying = false;
-            this.isReady = false;
-            this.videoID = 'V-o_40bAfIw'; // Starbucks cafe jazz playlist ID
-            this.loadScript();
-        }
-
-        loadScript() {
-            // Load YouTube IFrame Player API script
-            const tag = document.createElement('script');
-            tag.src = "https://www.youtube.com/iframe_api";
-            const firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-            // YouTube callback
-            window.onYouTubeIframeAPIReady = () => {
-                this.player = new YT.Player('yt-helper-player', {
-                    events: {
-                        'onReady': () => {
-                            this.isReady = true;
-                            if (this.player && typeof this.player.setVolume === 'function') {
-                                this.player.setVolume(50);
-                            }
-                            if (this.isPlaying) {
-                                this.start();
-                            }
-                        },
-                        'onStateChange': (event) => {
-                            // Loop safety: if video ends, play again
-                            if (event.data === YT.PlayerState.ENDED) {
-                                this.player.playVideo();
-                            }
-                        }
-                    }
-                });
-            };
+            this.videoUrl = "https://www.youtube.com/embed/V-o_40bAfIw?autoplay=1&controls=0&disablekb=1&fs=0&loop=1&playlist=V-o_40bAfIw&modestbranding=1&playsinline=1&rel=0&showinfo=0&enablejsapi=1";
         }
 
         start() {
             this.isPlaying = true;
-            if (this.isReady && this.player) {
-                try {
-                    this.player.playVideo();
-                } catch (e) {
-                    console.error("YouTube play failed:", e);
-                }
+            if (this.iframe) {
+                this.iframe.src = this.videoUrl;
             }
         }
 
         stop() {
             this.isPlaying = false;
-            if (this.isReady && this.player) {
-                try {
-                    this.player.pauseVideo();
-                } catch (e) {
-                    console.error("YouTube pause failed:", e);
-                }
+            if (this.iframe) {
+                this.iframe.src = "about:blank";
             }
         }
     }
