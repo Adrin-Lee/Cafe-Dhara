@@ -29,21 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // YouTube callback
             window.onYouTubeIframeAPIReady = () => {
                 this.player = new YT.Player('yt-helper-player', {
-                    height: '0',
-                    width: '0',
-                    videoId: this.videoID,
-                    playerVars: {
-                        'autoplay': 0,
-                        'controls': 0,
-                        'disablekb': 1,
-                        'fs': 0,
-                        'loop': 1,
-                        'playlist': this.videoID, // required for looping
-                        'modestbranding': 1,
-                        'playsinline': 1,
-                        'rel': 0,
-                        'showinfo': 0
-                    },
                     events: {
                         'onReady': () => {
                             this.isReady = true;
@@ -114,12 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Envelope Welcome Opening Animation
     const openEnvelope = () => {
+        // Start ambience immediately on user click to comply with mobile autoplay gesture restrictions
+        startAmbience();
+        
         envelopeWrapper.classList.add('open');
         setTimeout(() => {
             welcomeOverlay.style.opacity = '0';
             setTimeout(() => {
                 welcomeOverlay.classList.add('hidden');
-                startAmbience();
             }, 1200);
         }, 1500);
     };
